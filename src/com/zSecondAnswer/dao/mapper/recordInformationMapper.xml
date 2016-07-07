@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zSecondAnswer.dao.recordInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.zSecondAnswer.model.recordInformation" >
+    <id column="record_id" property="recordId" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="game_id" property="gameId" jdbcType="INTEGER" />
+    <result column="game_type" property="gameType" jdbcType="TINYINT" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="cost_time" property="costTime" jdbcType="INTEGER" />
+    <result column="finish_time" property="finishTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    record_id, uid, game_id, game_type, score, cost_time, finish_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from record_information
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from record_information
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zSecondAnswer.model.recordInformation" >
+    insert into record_information (record_id, uid, game_id, 
+      game_type, score, cost_time, 
+      finish_time)
+    values (#{recordId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{gameId,jdbcType=INTEGER}, 
+      #{gameType,jdbcType=TINYINT}, #{score,jdbcType=INTEGER}, #{costTime,jdbcType=INTEGER}, 
+      #{finishTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zSecondAnswer.model.recordInformation" >
+    insert into record_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="gameId != null" >
+        game_id,
+      </if>
+      <if test="gameType != null" >
+        game_type,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="costTime != null" >
+        cost_time,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        #{recordId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=INTEGER},
+      </if>
+      <if test="gameType != null" >
+        #{gameType,jdbcType=TINYINT},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="costTime != null" >
+        #{costTime,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zSecondAnswer.model.recordInformation" >
+    update record_information
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="gameId != null" >
+        game_id = #{gameId,jdbcType=INTEGER},
+      </if>
+      <if test="gameType != null" >
+        game_type = #{gameType,jdbcType=TINYINT},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="costTime != null" >
+        cost_time = #{costTime,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zSecondAnswer.model.recordInformation" >
+    update record_information
+    set uid = #{uid,jdbcType=INTEGER},
+      game_id = #{gameId,jdbcType=INTEGER},
+      game_type = #{gameType,jdbcType=TINYINT},
+      score = #{score,jdbcType=INTEGER},
+      cost_time = #{costTime,jdbcType=INTEGER},
+      finish_time = #{finishTime,jdbcType=VARCHAR}
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+</mapper>

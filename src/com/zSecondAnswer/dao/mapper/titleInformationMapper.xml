@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zSecondAnswer.dao.titleInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.zSecondAnswer.model.titleInformation" >
+    <id column="title_id" property="titleId" jdbcType="INTEGER" />
+    <result column="title_name" property="titleName" jdbcType="VARCHAR" />
+    <result column="title_describe" property="titleDescribe" jdbcType="VARCHAR" />
+    <result column="title_url" property="titleUrl" jdbcType="VARCHAR" />
+    <result column="title_schedule" property="titleSchedule" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    title_id, title_name, title_describe, title_url, title_schedule
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from title_information
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from title_information
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zSecondAnswer.model.titleInformation" >
+    insert into title_information (title_id, title_name, title_describe, 
+      title_url, title_schedule)
+    values (#{titleId,jdbcType=INTEGER}, #{titleName,jdbcType=VARCHAR}, #{titleDescribe,jdbcType=VARCHAR}, 
+      #{titleUrl,jdbcType=VARCHAR}, #{titleSchedule,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zSecondAnswer.model.titleInformation" >
+    insert into title_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="titleId != null" >
+        title_id,
+      </if>
+      <if test="titleName != null" >
+        title_name,
+      </if>
+      <if test="titleDescribe != null" >
+        title_describe,
+      </if>
+      <if test="titleUrl != null" >
+        title_url,
+      </if>
+      <if test="titleSchedule != null" >
+        title_schedule,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="titleId != null" >
+        #{titleId,jdbcType=INTEGER},
+      </if>
+      <if test="titleName != null" >
+        #{titleName,jdbcType=VARCHAR},
+      </if>
+      <if test="titleDescribe != null" >
+        #{titleDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="titleUrl != null" >
+        #{titleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="titleSchedule != null" >
+        #{titleSchedule,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zSecondAnswer.model.titleInformation" >
+    update title_information
+    <set >
+      <if test="titleName != null" >
+        title_name = #{titleName,jdbcType=VARCHAR},
+      </if>
+      <if test="titleDescribe != null" >
+        title_describe = #{titleDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="titleUrl != null" >
+        title_url = #{titleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="titleSchedule != null" >
+        title_schedule = #{titleSchedule,jdbcType=TINYINT},
+      </if>
+    </set>
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zSecondAnswer.model.titleInformation" >
+    update title_information
+    set title_name = #{titleName,jdbcType=VARCHAR},
+      title_describe = #{titleDescribe,jdbcType=VARCHAR},
+      title_url = #{titleUrl,jdbcType=VARCHAR},
+      title_schedule = #{titleSchedule,jdbcType=TINYINT}
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </update>
+</mapper>

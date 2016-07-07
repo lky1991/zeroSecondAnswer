@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zSecondAnswer.dao.userInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.zSecondAnswer.model.userInformation" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="subscribe_time" property="subscribeTime" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="personal_signature" property="personalSignature" jdbcType="VARCHAR" />
+    <result column="total_experience" property="totalExperience" jdbcType="INTEGER" />
+    <result column="total_integral" property="totalIntegral" jdbcType="INTEGER" />
+    <result column="total_inference_currency" property="totalInferenceCurrency" jdbcType="INTEGER" />
+    <result column="fashion_list" property="fashionList" jdbcType="VARCHAR" />
+    <result column="achievement_list" property="achievementList" jdbcType="VARCHAR" />
+    <result column="task_list" property="taskList" jdbcType="VARCHAR" />
+    <result column="game_list" property="gameList" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    uid, nick_name, head_img_url, sex, country, province, city, subscribe_time, open_id, 
+    personal_signature, total_experience, total_integral, total_inference_currency, fashion_list, 
+    achievement_list, task_list, game_list
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_information
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_information
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_information
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="addUser" parameterType="com.zSecondAnswer.model.userInformation" >
+    insert into user_information (nick_name, head_img_url, 
+      sex, country, province, 
+      city, subscribe_time, open_id, 
+      personal_signature, total_experience, total_integral, 
+      total_inference_currency, fashion_list, achievement_list, 
+      task_list, game_list)
+    values (#{nickName,jdbcType=VARCHAR}, #{headImgUrl,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{subscribeTime,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
+      #{personalSignature,jdbcType=VARCHAR}, #{totalExperience,jdbcType=INTEGER}, #{totalIntegral,jdbcType=INTEGER}, 
+      #{totalInferenceCurrency,jdbcType=INTEGER}, #{fashionList,jdbcType=VARCHAR}, #{achievementList,jdbcType=VARCHAR}, 
+      #{taskList,jdbcType=VARCHAR}, #{gameList,jdbcType=VARCHAR})
+  </insert>
+  
+  
+  <update id="updateUser" parameterType="com.zSecondAnswer.model.userInformation" >
+    update user_information
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      subscribe_time = #{subscribeTime,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      personal_signature = #{personalSignature,jdbcType=VARCHAR},
+      total_experience = #{totalExperience,jdbcType=INTEGER},
+      total_integral = #{totalIntegral,jdbcType=INTEGER},
+      total_inference_currency = #{totalInferenceCurrency,jdbcType=INTEGER},
+      fashion_list = #{fashionList,jdbcType=VARCHAR},
+      achievement_list = #{achievementList,jdbcType=VARCHAR},
+      task_list = #{taskList,jdbcType=VARCHAR},
+      game_list = #{gameList,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

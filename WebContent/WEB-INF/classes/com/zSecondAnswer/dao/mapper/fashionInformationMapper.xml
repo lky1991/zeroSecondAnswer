@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zSecondAnswer.dao.fashionInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.zSecondAnswer.model.fashionInformation" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="fdescribe" property="fdescribe" jdbcType="VARCHAR" />
+    <result column="fashion_url" property="fashionUrl" jdbcType="VARCHAR" />
+    <result column="wearing_parts" property="wearingParts" jdbcType="TINYINT" />
+    <result column="fashion_price" property="fashionPrice" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, fname, fdescribe, fashion_url, wearing_parts, fashion_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fashion_information
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fashion_information
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zSecondAnswer.model.fashionInformation" >
+    insert into fashion_information (fid, fname, fdescribe, 
+      fashion_url, wearing_parts, fashion_price
+      )
+    values (#{fid,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, #{fdescribe,jdbcType=VARCHAR}, 
+      #{fashionUrl,jdbcType=VARCHAR}, #{wearingParts,jdbcType=TINYINT}, #{fashionPrice,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zSecondAnswer.model.fashionInformation" >
+    insert into fashion_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="fdescribe != null" >
+        fdescribe,
+      </if>
+      <if test="fashionUrl != null" >
+        fashion_url,
+      </if>
+      <if test="wearingParts != null" >
+        wearing_parts,
+      </if>
+      <if test="fashionPrice != null" >
+        fashion_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fdescribe != null" >
+        #{fdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="fashionUrl != null" >
+        #{fashionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wearingParts != null" >
+        #{wearingParts,jdbcType=TINYINT},
+      </if>
+      <if test="fashionPrice != null" >
+        #{fashionPrice,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zSecondAnswer.model.fashionInformation" >
+    update fashion_information
+    <set >
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fdescribe != null" >
+        fdescribe = #{fdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="fashionUrl != null" >
+        fashion_url = #{fashionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wearingParts != null" >
+        wearing_parts = #{wearingParts,jdbcType=TINYINT},
+      </if>
+      <if test="fashionPrice != null" >
+        fashion_price = #{fashionPrice,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zSecondAnswer.model.fashionInformation" >
+    update fashion_information
+    set fname = #{fname,jdbcType=VARCHAR},
+      fdescribe = #{fdescribe,jdbcType=VARCHAR},
+      fashion_url = #{fashionUrl,jdbcType=VARCHAR},
+      wearing_parts = #{wearingParts,jdbcType=TINYINT},
+      fashion_price = #{fashionPrice,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

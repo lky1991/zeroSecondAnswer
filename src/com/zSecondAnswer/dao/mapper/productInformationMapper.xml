@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zSecondAnswer.dao.productInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.zSecondAnswer.model.productInformation" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="product_describer" property="productDescriber" jdbcType="VARCHAR" />
+    <result column="product_detail" property="productDetail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pid, product_describer, product_detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_information
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_information
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zSecondAnswer.model.productInformation" >
+    insert into product_information (pid, product_describer, product_detail
+      )
+    values (#{pid,jdbcType=INTEGER}, #{productDescriber,jdbcType=VARCHAR}, #{productDetail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zSecondAnswer.model.productInformation" >
+    insert into product_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="productDescriber != null" >
+        product_describer,
+      </if>
+      <if test="productDetail != null" >
+        product_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="productDescriber != null" >
+        #{productDescriber,jdbcType=VARCHAR},
+      </if>
+      <if test="productDetail != null" >
+        #{productDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zSecondAnswer.model.productInformation" >
+    update product_information
+    <set >
+      <if test="productDescriber != null" >
+        product_describer = #{productDescriber,jdbcType=VARCHAR},
+      </if>
+      <if test="productDetail != null" >
+        product_detail = #{productDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zSecondAnswer.model.productInformation" >
+    update product_information
+    set product_describer = #{productDescriber,jdbcType=VARCHAR},
+      product_detail = #{productDetail,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
